@@ -35,6 +35,7 @@ echo "server {
      location /redirect_me {
           return 301 https://example.com;
      }
+}
 " | sudo tee /etc/nginx/sites-available/redirect
 
 sudo ln -s /etc/nginx/sites-available/redirect /etc/nginx/sites-enabled/redirect
