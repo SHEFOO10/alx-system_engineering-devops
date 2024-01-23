@@ -1,0 +1,8 @@
+#/usr/bin/env bash
+# fix web server container have apache2 not running
+
+# first download and create container with name Alx 
+sudo docker run -p 8080:80 --name Alx -d -it holbertonschool/265-0
+
+# second execute service apache2 start
+sudo docker exec -it Alx /bin/bash -c 'service apache2 start'
