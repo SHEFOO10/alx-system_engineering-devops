@@ -1,6 +1,20 @@
 #!/usr/bin/env bash
 # configure my nginx server to have custom 404 page
 
+
+# update the package lists
+apt-get update
+
+# installs nginx server
+apt-get install nginx -y
+
+
+# Creates the /etc/nginx/html directory, which will serve as the document root directory for Nginx.
+mkdir /etc/nginx/html
+
+# creates the content of the index.html file.
+echo "Hello World!" > /etc/nginx/html/index.html
+
 sudo mkdir /etc/nginx/html/error_pages
 chown -R ubuntu /etc/nginx/html/error_pages
 echo "Ceci n'est pas une page" > /etc/nginx/html/error_pages/404.html
