@@ -38,6 +38,6 @@ echo "server {
 " > /etc/nginx/sites-available/default
 
 sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
-
+sudo ufw allow 'Nginx HTTP'
 sudo nginx -t
 sudo service nginx reload
