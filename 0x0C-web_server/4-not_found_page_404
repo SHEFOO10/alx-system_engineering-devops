@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-# configure my nginx server to have custom 404 page
-
+# Configure your Nginx server so that /redirect_me is redirecting to another page.
 
 # update the package lists
 apt-get update
@@ -15,9 +14,17 @@ mkdir /etc/nginx/html
 # creates the content of the index.html file.
 echo "Hello World!" > /etc/nginx/html/index.html
 
-sudo mkdir /etc/nginx/html/error_pages
-chown -R ubuntu /etc/nginx/html/error_pages
-echo "Ceci n'est pas une page" > /etc/nginx/html/error_pages/404.html
+# sets Nginx to listen on port 80 and serve files from /etc/nginx/html directory
+
+echo "server {
+     listen    80 default_server;
+     listen    [::]:80 default_server;
+     root      /etc/nginx/html;
+     index     index.html index.htm;
+}
+" > /etc/nginx/sites-available/default
+
+# configure server for redirection
 
 echo "server {
      listen    80 default_server;
@@ -28,16 +35,9 @@ echo "server {
      location /redirect_me {
           return 301 https://example.com;
      }
-
-     error_page 404 /404.html;
-     location /404 {
-       root /etc/nginx/html;
-       internal;
-     }
 }
 " > /etc/nginx/sites-available/default
 
-sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
-sudo ufw allow 'Nginx HTTP'
-sudo nginx -t
-sudo service nginx reload
+
+# Reload Nginx service to apply configuration chanages
+service nginx restart
