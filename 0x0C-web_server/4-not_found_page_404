@@ -11,7 +11,7 @@ echo "server {
      root      /etc/nginx/html;
      index     index.html index.htm;
 
-     error_page 404 /etc/nginx/error_pages/404.html
+     error_page 404 /etc/nginx/error_pages/404.html;
      location / {
      	  tryfiles $uri $uri/ /404.html
      }
