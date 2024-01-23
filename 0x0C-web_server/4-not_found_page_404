@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# configure my nginx server to have custom 404 page
+
+sudo mkdir /etc/nginx/error_pages
+chown -R ubuntu /etc/nginx/error_pages
+echo "Ceci n'est pas une page" > /etc/nginx/error_pages/404.html
+
+echo "server {
+     listen    80 default_server;
+     listen    [::]:80 default_server;
+     root      /etc/nginx/html;
+     index     index.html index.htm;
+
+     error_page 404 /etc/nginx/error_pages/404.html
+     location / {
+     	  tryfiles $uri $uri/ /404.html
+     }
+
+     location /redirect_me {
+          return 301 https://example.com;
+     }
+}
+" > /etc/nginx/sites-available/default
+
+
+sudo nginx -t
+sudo service nginx reload
