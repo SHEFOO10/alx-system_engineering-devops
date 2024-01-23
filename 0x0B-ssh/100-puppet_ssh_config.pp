@@ -8,7 +8,7 @@ file_line { 'configure_indentity':
   match  => '^#?IndentityFile',
 }
 
-# disable passowrd authentication
+# Disable PasswordAuthentication in sshd_config
 file_line { 'disable_password_auth':
   ensure => 'present',
   path   => '/etc/ssh/ssh_config',
