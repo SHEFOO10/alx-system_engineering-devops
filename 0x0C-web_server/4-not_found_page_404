@@ -13,7 +13,7 @@ echo "server {
 
      error_page 404 /etc/nginx/error_pages/404.html;
      location / {
-     	  tryfiles $uri $uri/ /404.html;
+     	  try_files $uri $uri/ /404.html;
      }
 
      location /redirect_me {
