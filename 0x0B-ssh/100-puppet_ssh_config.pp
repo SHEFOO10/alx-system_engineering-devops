@@ -1,7 +1,5 @@
 # configure server private key
 
-include stdlib
-
 file_line { 'SSH_Private_key':
   ensure => 'present',
   path   => '/etc/ssh/ssh_config',
