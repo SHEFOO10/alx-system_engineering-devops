@@ -1,18 +1,16 @@
-# 4. Client configuration file (w/ Puppet)
+# configure server private key
 
-
-# Disable PasswordAuthentication in sshd_config
-file_line { 'disable_password_auth':
+file_line { 'SSH_Private key':
   ensure => 'present',
   path   => '/etc/ssh/ssh_config',
-  line   => 'PasswordAuthentication no',
-  match  => '^#?PasswordAuthentication',
+  line   => '    IndentityFile ~/.ssh/school',
+  match  => '^[#]+[\s]*(?i)IdentityFile[\s]+~/.ssh/id_rsa$',
 }
 
-# configured to use the private key ~/.ssh/school
-file_line { 'configure_indentity':
+
+file_line { 'Deny_Password_Auth':
   ensure => 'present',
   path   => '/etc/ssh/ssh_config',
-  line   => 'IndentityFile ~/.ssh/school',
-  match  => '^#?IndentityFile',
+  line   => '    PasswordAuthentication no',
+  match  => '^[#]+[\s]*PasswordAuthentication[\s]+(yes|no)$',
 }
