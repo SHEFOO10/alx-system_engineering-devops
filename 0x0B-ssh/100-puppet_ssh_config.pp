@@ -3,7 +3,7 @@
 file_line { 'SSH_Private key':
   ensure => 'present',
   path   => '/etc/ssh/ssh_config',
-  line   => '    IndentityFile ~/.ssh/school',
+  line   => '    IdentityFile ~/.ssh/school',
   match  => '^[#]+[\s]*(?i)IdentityFile[\s]+~/.ssh/id_rsa$',
 }
 
