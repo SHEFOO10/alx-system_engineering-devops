@@ -1,18 +1,19 @@
-# configure server private key
+# 4. Client configuration file (w/ Puppet)
 
-include stdlib
 
-file_line { 'SSH Private key':
+# Disable PasswordAuthentication in sshd_config
+file_line { 'disable_password_auth':
   ensure => 'present',
   path   => '/etc/ssh/ssh_config',
-  line   => '    IndentityFile ~/.ssh/school',
-  match  => '^[#]+[\s]*(?i)IdentityFile[\s]+~/.ssh/id_rsa$',
+  line   => 'PasswordAuthentication no',
+  match  => '^#?PasswordAuthentication',
 }
 
-
-file_line { 'Deny Password Auth':
+# SSH client configuration must be configured to use the
+# private key ~/.ssh/school
+file_line { 'use_school_private_key':
   ensure => 'present',
   path   => '/etc/ssh/ssh_config',
-  line   => '    PasswordAuthentication no',
-  match  => '^[#]+[\s]*PasswordAuthentication[\s]+(yes|no)$',
+  line   => 'IdentityFile ~/.ssh/school',
+  match  => '^#?IdentityFile',
 }
