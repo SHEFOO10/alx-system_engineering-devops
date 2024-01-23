@@ -27,8 +27,8 @@ echo "server {
 # configure server for redirection
 
 echo "server {
-     listen    80;
-     listen    [::]:80;
+     listen    80 default_server;
+     listen    [::]:80 default_server;
      root      /var/www/html;
      index     index.html index.htm index.nginx-debian.html;
 
@@ -40,4 +40,4 @@ echo "server {
 
 
 # Reload Nginx service to apply configuration chanages
-service nginx reload
+service nginx restart
