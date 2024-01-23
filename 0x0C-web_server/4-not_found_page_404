@@ -14,7 +14,7 @@ echo "server {
      error_page 404 /error_pages/404.html;
 
      location = /redirect_me {
-          return 301 https://example.com permanent;
+          return 301 https://example.com;
      }
 }
 " > /etc/nginx/sites-available/default
