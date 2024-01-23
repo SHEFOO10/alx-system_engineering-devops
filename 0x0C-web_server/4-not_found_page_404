@@ -1,43 +1,27 @@
 #!/usr/bin/env bash
-# Configure your Nginx server so that /redirect_me is redirecting to another page.
+# sets up a new 404 error page
 
-# update the package lists
-apt-get update
+sudo apt-get update
+sudo apt-get install -y nginx
+echo "Hello World!" > index.html
+sudo mv index.html /var/www/html
 
-# installs nginx server
-apt-get install nginx -y
 
-
-# Creates the /etc/nginx/html directory, which will serve as the document root directory for Nginx.
-mkdir /etc/nginx/html
-
-# creates the content of the index.html file.
-echo "Hello World!" > /etc/nginx/html/index.html
-
-# sets Nginx to listen on port 80 and serve files from /etc/nginx/html directory
-
+echo "Ceci n'est pas une page" > 404.html
+sudo mv 404.html /var/www/html
 echo "server {
-     listen    80 default_server;
-     listen    [::]:80 default_server;
-     root      /etc/nginx/html;
-     index     index.html index.htm;
-}
-" > /etc/nginx/sites-available/default
+   listen 80 default_server;
+   listen [::]:80 default_server;
 
-# configure server for redirection
-
-echo "server {
-     listen    80 default_server;
-     listen    [::]:80 default_server;
-     root      /etc/nginx/html;
-     index     index.html index.htm;
-
-     location /redirect_me {
-          return 301 https://example.com;
-     }
-}
-" > /etc/nginx/sites-available/default
-
-
-# Reload Nginx service to apply configuration chanages
-service nginx restart
+   root /var/www/html;
+   index index.html;
+   location /redirect_me {
+      return 301 https://github.com/SHEFOO10;
+   }
+   error_page 404 /404.html;
+   location = /404.html{
+      internal;
+   }
+}" > default
+sudo mv -f default /etc/nginx/sites-available/default
+sudo service nginx restart
