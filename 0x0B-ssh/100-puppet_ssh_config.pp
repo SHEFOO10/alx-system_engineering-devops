@@ -11,7 +11,7 @@ file_line { 'SSH Private key':
 }
 
 
-file_line { 'Disable Password Auth':
+file_line { 'Deny Password Auth':
   path               => '/etc/ssh/ssh_config',
   line               => '    PasswordAuthentication no',
   match              => '^[#]+[\s]*PasswordAuthentication[\s]+(yes|no)$',
