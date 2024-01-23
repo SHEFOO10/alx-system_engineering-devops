@@ -1,4 +1,4 @@
-#/usr/bin/env bash
+#!/usr/bin/env bash
 # fix web server container have apache2 not running
 
 # first download and create container with name Alx 
