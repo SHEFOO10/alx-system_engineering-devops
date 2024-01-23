@@ -24,7 +24,7 @@ echo "server {
 }
 " > /etc/nginx/sites-available/default
 
-# configure server block for redirection
+# configure server for redirection
 
 echo "server {
      listen    80;
@@ -36,9 +36,8 @@ echo "server {
           return 301 https://example.com;
      }
 }
-" | sudo tee /etc/nginx/sites-available/redirect
+" > /etc/nginx/sites-available/default
 
-sudo ln -s /etc/nginx/sites-available/redirect /etc/nginx/sites-enabled/redirect
 
 # Reload Nginx service to apply configuration chanages
 service nginx reload
