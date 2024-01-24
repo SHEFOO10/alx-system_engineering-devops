@@ -33,7 +33,7 @@ echo "server {
      index     index.html index.htm;
 
      location /redirect_me {
-          return 301 https://example.com;
+          rewrite ^ https://github.com/SHEFOO10 permanent;
      }
 }
 " > /etc/nginx/sites-available/default
