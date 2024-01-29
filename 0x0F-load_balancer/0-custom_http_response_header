@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# set X-Served-By header to the current server
+
+sudo sed -i "3 a\   add_header X-Served-By $(hostname);" /etc/nginx/sites-available/default
+sudo service nginx reload
