@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 # Install and configure HAproxy
 
-sudo apt-get install --no-install-recommends software-properties-common -y
-sudo add-apt-repository ppa:vbernat/haproxy-2.9 -y
-sudo apt-get install haproxy=2.9.\* -y
+sudo apt-get update;
+sudo apt-get install haproxy -y;
+
+sudo sh -c 'echo "ENABLED=1" >> haproxy'
 
 echo "frontend web-front
         bind *:80
@@ -13,5 +14,5 @@ backend web-backend
         balance roundrobin
         server web1 34.224.63.137:80 check
         server web2 100.25.192.100:80 check
-" | sudo tee -a /etc/haproxy/haproxy.cfg
+" | sudo tee -a /etc/haproxy/haproxy.cfg > /dev/null
 sudo service haproxy restart
