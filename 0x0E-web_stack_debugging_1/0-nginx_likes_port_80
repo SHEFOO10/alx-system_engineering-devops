@@ -2,5 +2,6 @@
 # install and run nginx service
 sudo apt-get update -y
 sudo apt-get install nginx -y
+sudo rm -f /etc/nginx/sites-enabled/default
 sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 sudo service nginx start
