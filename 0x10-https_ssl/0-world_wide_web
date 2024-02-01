@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# display information about subdomains.
+
+get_DNS_record () {
+	result=$(dig "$2"."$1" | grep -A1 'ANSWER SECTION:')
+	destination=$(echo "$result" | awk '{getline; print $NF}')
+	record_type=$(echo "$result" | awk '{getline; print $7}')
+	echo "The subdomain $2 is a $record_type record and points to $destination"
+}
+
+if [ -n "$2" ]; then
+	get_DNS_record "$1" "$2"
+else
+	get_DNS_record "$1" www
+	get_DNS_record "$1" lb-01
+	get_DNS_record "$1" web-01
+	get_DNS_record "$1" web-02
+fi
