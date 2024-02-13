@@ -2,5 +2,5 @@
 # 1. Run Nginx as Nginx
 chmod o+r /etc/nginx/nginx.conf
 pkill apache2
-sed -i '/listen 80 default_server/a\\tlisten 8080 default_server;' /etc/nginx/sites-available/default
+sed -i 's/listen 80 default_server/listen 8080 default_server/' /etc/nginx/sites-available/default
 sudo -u nginx service nginx restart
